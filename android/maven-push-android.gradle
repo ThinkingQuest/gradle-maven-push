@@ -2,6 +2,7 @@
  * Publish to local maven repository. Run command:
  * gradle clean build publishToMavenLocal
  *
+ * TODO: artifact中的'sdk-release.aar' 是hard code。需要替换成对应的变量。
  */
 apply plugin: 'maven-publish'
 
