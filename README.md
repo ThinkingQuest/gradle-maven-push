@@ -1,34 +1,15 @@
 # gradle-maven-push
-一个gradle的script。用于发布到maven central。
+在软件开发的世界里，任何造成大量的工程师为了同一个问题而各自浪费时间和精力的事情，都是罪大恶极的。Gradle就做了一件这样的事：搞定gradle的发布任务是非常困难的。  
+Gradle中与发布到maven相关的插件有两个：'maven'和'maven-publish'。
+maven-publish为新的插件，目标是替代前者。
+但maven-publish不支持为pom签名，也就是说无法实现发布到maven中央仓库。
+maven提供了install命令，可以发布到本地maven cache，但只对apply了java plugin的工程有效，并且这一点并未在官方文档中说明。  
+总之，两个插件各有各的问题，没有一个好用，能干脆利落的解决问题。
 
-## Usage
-### 配置
-在build.gradle最后增加：
-```groovy
-apply from: 'maven-push-java.gradle'
-```
-并将maven-push-java.gradle文件复制到项目目录下（与build.gradle同目录）。  
-  
-在USER_HOME/.gradle/gradle.properties文件中增加：
-```groovy
-NEXUS_USERNAME=yourusername
-NEXUS_PASSWORD=yourpassword
-signing.keyId=your key id like ABCDEF12
-signing.password=yourpassword
-signing.secretKeyRingFile=~/.gnupg/secring.gpg
-```
-`~`代表USER_HOME，实践中这里需要使用绝对路径。因为脚本中判断~会当作相对路径与工程路径拼接，而不会像/Users/xxxuser这样的路径一样被当作绝对路径。  
+## 目标
+* 支持java library（packaging为jar），支持android library（packaging为aar）
+* 支持发布到本地maven cache（即~/.m2/repository）相当于maven install
+* 支持通过sonatype发布到maven中央仓库。实现指定的规范，包括gpg签名等。
 
-将gradle.properties文件复制到或合并到项目目录下，相应修改其配置值。
-
-
-### 发布
-要发布到本地maven仓库，执行：
-```
-gradle publishToMavenLocal
-```
-
-要发布到maven中央仓库，执行：
-```
-gradle uploadArchives
-```
+## 使用
+两个gradle插件。详见`android`和`java`目录。
