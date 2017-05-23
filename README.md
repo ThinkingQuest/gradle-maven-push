@@ -5,9 +5,9 @@
 ### 配置
 在build.gradle最后增加：
 ```groovy
-apply from: 'maven_push_java.gradle'
+apply from: 'maven-push-java.gradle'
 ```
-并将maven_push_java.gradle文件复制到项目目录下（与build.gradle同目录）。  
+并将maven-push-java.gradle文件复制到项目目录下（与build.gradle同目录）。  
   
 在USER_HOME/.gradle/gradle.properties文件中增加：
 ```groovy
